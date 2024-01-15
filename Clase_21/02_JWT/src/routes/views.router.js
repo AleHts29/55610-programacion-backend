@@ -74,7 +74,7 @@ router.get('/login', (req, res) => {
         return res.status(401).send("Login failed, check your credentianls")
     } else {
         req.session.user = username;
-        req.session.admin = true;
+        req.session.admin = false;
         res.send('Login Successful!!')
     }
 });
