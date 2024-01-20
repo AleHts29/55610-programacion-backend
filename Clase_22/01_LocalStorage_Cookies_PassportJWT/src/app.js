@@ -35,7 +35,7 @@ app.use(cookieParser("CoderS3cr3tC0d3"));
 //Middlewares Passport
 initializePassport();
 app.use(passport.initialize());
-//app.use(passport.session());
+// app.use(passport.session());
 
 //Declare routers:
 app.use("/", viewsRouter);
@@ -43,7 +43,7 @@ app.use("/users", usersViewRouter);
 app.use("/api/jwt", jwtRouter);
 app.use('/api/users', usersRouter);
 
-const SERVER_PORT = 9090;
+const SERVER_PORT = 9092;
 app.listen(SERVER_PORT, () => {
     console.log("Servidor escuchando por el puerto: " + SERVER_PORT);
 });

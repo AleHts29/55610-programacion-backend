@@ -70,7 +70,7 @@ app.use('/users', usersViewRouter)
 app.use('/api/sessions', sessionsRouter)
 app.use("/github", githubLoginViewRouter)
 
-const PORT = 9090
+const PORT = 9092
 app.listen(PORT, () => {
     console.log(`Server run on port: ${PORT}`);
 })

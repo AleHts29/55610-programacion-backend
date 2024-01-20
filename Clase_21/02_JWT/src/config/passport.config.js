@@ -33,7 +33,7 @@ const initializePassport = () => {
                         age: 28,
                         email: profile._json.email,
                         password: '',
-                        loggedBy: "GitHub"
+                        loggedBy: "GitHub",
                     }
                     const result = await userModel.create(newUser);
                     return done(null, result)

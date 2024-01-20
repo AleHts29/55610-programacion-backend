@@ -1,8 +1,10 @@
 import passport from 'passport';
 import userModel from '../models/user.model.js';
 import jwtStrategy from 'passport-jwt';
-import { PRIVATE_KEY } from '../utils.js';
+import passportLocal from 'passport-local';
+import { PRIVATE_KEY, createHash } from '../utils.js';
 
+const localStrategy = passportLocal.Strategy;
 
 const JwtStrategy = jwtStrategy.Strategy;
 const ExtractJWT = jwtStrategy.ExtractJwt;
@@ -19,6 +21,40 @@ const initializePassport = () => {
                 console.log("JWT obtenido del Payload");
                 console.log(jwt_payload);
                 return done(null, jwt_payload.user)
+            } catch (error) {
+                return done(error)
+            }
+        }
+    ));
+
+
+    passport.use('register', new localStrategy(
+        // passReqToCallback: para convertirlo en un callback de request, para asi poder iteracturar con la data que viene del cliente
+        // usernameField: renombramos el username
+        { passReqToCallback: true, usernameField: 'email' },
+        async (req, username, password, done) => {
+            const { first_name, last_name, email, age } = req.body;
+            try {
+                //Validamos si el user existe en la DB
+                const exist = await userModel.findOne({ email });
+                if (exist) {
+                    console.log("El user ya existe!!");
+                    done(null, false)
+                }
+
+                const user = {
+                    first_name,
+                    last_name,
+                    email,
+                    age,
+                    // password //se encriptara despues...
+                    password: createHash(password),
+                    loggedBy: 'form'
+                }
+                const result = await userModel.create(user);
+                console.log(result);
+                // Todo sale ok
+                return done(null, result)
             } catch (error) {
                 return done(error)
             }

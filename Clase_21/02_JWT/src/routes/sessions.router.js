@@ -57,7 +57,7 @@ router.post('/login', passport.authenticate('login',
     //     age: user.age
     // }
 
-    // Usando JWT
+    // Usando JWT usando Postman - no se se usan session
     const access_token = generateJWToken(user)
     console.log(access_token);
     res.send({ access_token: access_token });

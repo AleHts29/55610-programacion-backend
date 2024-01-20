@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import userModel from '../models/user.model.js';
+import passport from 'passport';
 import { isValidPassword } from '../utils.js';
 import { generateJWToken } from '../utils.js';
 
@@ -48,5 +49,12 @@ router.post("/login", async (req, res) => {
     }
 
 });
+
+// Register
+router.post('/register', passport.authenticate('register', { session: false }), async (req, res) => {
+    console.log("Registrando usuario:");
+    res.status(201).send({ status: "success", message: "Usuario creado con extito." });
+})
+
 
 export default router;

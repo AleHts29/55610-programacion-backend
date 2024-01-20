@@ -22,8 +22,8 @@ form.addEventListener('submit', e => {
                     // 2do:cookie
                     console.log("Cookies generadas:");
                     console.log(document.cookie);
-                    // alert("Login realizado con exito!");
-                    // window.location.replace('/users');
+                    alert("Login realizado con exito!");
+                    window.location.replace('/users');
                 });
         } else if (result.status === 401) {
             console.log(result);
