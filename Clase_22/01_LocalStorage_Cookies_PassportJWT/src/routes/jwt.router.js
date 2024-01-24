@@ -50,7 +50,7 @@ router.post("/login", async (req, res) => {
 
 });
 
-// Register
+// Register PassportLocal
 router.post('/register', passport.authenticate('register', { session: false }), async (req, res) => {
     console.log("Registrando usuario:");
     res.status(201).send({ status: "success", message: "Usuario creado con extito." });

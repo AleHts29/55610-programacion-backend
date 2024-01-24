@@ -22,13 +22,13 @@ export default class CustomRouter {
     // función que procese todas las funciones internas del router (middlewares y el callback principal)
     // Se explica en el slice 28
     applyCallbacks(callbacks) {
-        return callbacks.map((callback) => async (...params) => {
+        return callbacks.map((callback) => async (...item) => {
             try {
-                await callback.apply(this, params);
+                await callback.apply(this, item);
             } catch (error) {
                 console.error(error);
                 // params[1] hace referencia al res
-                params[1].status(500).send(error);
+                item[1].status(500).send(error);
             }
         });
     };
