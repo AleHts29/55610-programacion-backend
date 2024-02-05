@@ -18,7 +18,6 @@ router.get("/githubcallback", passport.authenticate('github', { session: false, 
     // req.session.admin = true;
     // res.redirect("/users");
 
-
     // conJWT 
     const tokenUser = {
         name: `${user.first_name} ${user.last_name}`,
@@ -36,10 +35,8 @@ router.get("/githubcallback", passport.authenticate('github', { session: false, 
             // httpOnly: false //Si se expone la cookie
 
         }
-
     )
     res.redirect("/users");
-
 });
 
 router.post("/login", async (req, res) => {
