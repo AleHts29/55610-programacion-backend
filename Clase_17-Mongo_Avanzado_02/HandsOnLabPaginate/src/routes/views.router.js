@@ -12,6 +12,7 @@ router.get('/students', async (req, res) => {
     //Lean es crucial para mostrar en Handlebars, ya que evita la "hidratación" del documento de mongoose,
     //esto hace que a Handlebars llegue el documento como plain object y no como Document.
     let result = await studentsModel.paginate({}, { page, limit: 5, lean: true })
+    // console.log(result);
     result.prevLink = result.hasPrevPage ? `http://localhost:9090/students?page=${result.prevPage}` : '';
     result.nextLink = result.hasNextPage ? `http://localhost:9090/students?page=${result.nextPage}` : '';
     result.isValid = !(page <= 0 || page > result.totalPages)
