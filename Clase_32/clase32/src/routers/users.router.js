@@ -11,6 +11,6 @@ router.post("/", saveUser);
 
 // Para implementar este middleware se debe sacar/comentar el try/catch del controllers/users.controller.js y decomentar --> router.use(errorHandler);
 
-// router.use(errorHandler);
+router.use(errorHandler);
 
 export default router;
