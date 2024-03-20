@@ -1,0 +1,89 @@
+paths:
+  /api/users:
+    get:
+      summary: Obtiene todos los usuarios de la App.
+      tags: 
+        - Users
+      responses:
+        "200":
+          description: respuesta exitosa! se retorna un arreglo con los usuarios.
+          content:  
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/User'
+        "400":
+          description: Se envio un dato no valido.
+        "500":
+          description: Error inesperado en el servidor, no se pudo manejar el proceso.
+  
+  /api/users/{uid}:
+    get:
+      summary: Obtiene un usuario de la App kbuscando por uid.
+      tags: 
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: id del usuario que se desea solicitar.
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: respuesta exitosa! se retorna un arreglo con los usuarios.
+          content:  
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/User'
+        "400":
+          description: Se envio un dato no valido.
+        "500":
+          description: Error inesperado en el servidor, no se pudo manejar el proceso.
+
+
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id: 
+          type: ObjectId
+          description: Id autogenerado de Mongo.
+        first_name: 
+          type: String
+          description: nombre del usuario
+        last_name: 
+          type: String
+          description: apellido del usuario
+        email: 
+          type: String
+          description: email del usuario
+        password: 
+          type: String
+          description: password del usuario
+        role: 
+          type: String
+          description: rol del usuario
+        pet: 
+          type: Array
+          description: array de mascotas del usuario
+      example:
+        _id: ObjectId("655eacde18d63f2d8e18f8c5")
+        first_name: Usuario de prueba 1
+        last_name: Apellido de prueba 1
+        email: correodeprueba1@gmail.com
+        password: $2b$10$jo8EM4kblYt2BXI/K5t12OsScO6fTAgjlMFxLJVAnWO6xn4tmd7T2
+        role: user
+        pets: []
+    # Pets:
+
+
+
+
+
+
