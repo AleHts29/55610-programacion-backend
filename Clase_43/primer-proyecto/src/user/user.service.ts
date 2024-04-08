@@ -1,29 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
+// import { User } from './entities/user.entity';
+
+
+import { InjectModel } from '@nestjs/mongoose';
+import { User, UserDocument } from './schema/user.schema';
+import { Model } from 'mongoose';
 
 
 @Injectable()
 export class UserService {
-
   // Manejamos algo en memoria
-  users: Array<User>
+  // users: Array<User>
 
-  constructor() {
-    this.users = []
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {
+    // this.users = []
   }
 
-
-  create(createUserDto: CreateUserDto) {
-    createUserDto.id = this.users.length + 1
-    let newUser = this.users.push(createUserDto)
-    console.log(newUser);
-    return newUser;
+  async create(createUserDto: CreateUserDto) {
+    return await this.userModel.create(createUserDto);
   }
 
-  findAll() {
-    return this.users;
+  async findAll() {
+    return await this.userModel.find({});
   }
 
   findOne(id: number) {
